@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Layers, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Layers } from 'lucide-react';
 import { SystemNodeId } from '../data/systemsData';
 
 interface OrbitalSystemProps {
@@ -438,167 +438,138 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
             className="font-serif text-[49px] font-bold text-white tracking-normal sm:tracking-tight leading-snug sm:leading-[1.2] md:leading-[1.25] py-1.5 overflow-visible w-[1500px] max-w-full"
           >
             <span className="block w-auto text-[54px]">What clients hire IP3 to deliver.</span>
+            <span className="block text-2xl sm:text-3xl font-normal text-slate-300 italic tracking-normal mt-2">
+              (Six cards, each = client problem + deliverables)
+            </span>
           </motion.h2>
-        </div>
 
-        {/* Six Cards: Client Problem + Deliverables */}
-        <div
-          id="client-deliverables-grid"
-          className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3.5 sm:gap-4 relative z-20 mt-4"
-        >
-          {[
-            {
-              id: 'client-deliverable-card-diagnose',
-              stageId: 'institutions',
-              number: '01',
-              title: 'Diagnose',
-              accentColor: 'bg-[#ff7e67]',
-              accentTextColor: 'text-[#ff7e67]',
-              borderColor: 'border-[#ff7e67]/30 hover:border-[#ff7e67]/70',
-              glowColor: 'hover:shadow-[0_12px_36px_rgba(255,126,103,0.12)]',
-              clientProblem: 'Unclear root causes, institutional gridlock, distorted market signals, or diagnostic blind spots stalling critical reforms.',
-              deliverables: [
-                'Diagnostic dossiers & root-cause mapping',
-                'Institutional political-economy audits',
-                'Market structure & baseline assessments'
-              ]
-            },
-            {
-              id: 'client-deliverable-card-design',
-              stageId: 'policy',
-              number: '02',
-              title: 'Design',
-              accentColor: 'bg-[#2dd4bf]',
-              accentTextColor: 'text-[#2dd4bf]',
-              borderColor: 'border-[#2dd4bf]/30 hover:border-[#2dd4bf]/70',
-              glowColor: 'hover:shadow-[0_12px_36px_rgba(45,212,191,0.12)]',
-              clientProblem: 'High-level policy mandates lack actionable program blueprints, governance rules, and robust theories of change.',
-              deliverables: [
-                'Multi-year program & policy blueprints',
-                'Theory of Change & operational roadmaps',
-                'Regulatory sandboxes & statutory frameworks'
-              ]
-            },
-            {
-              id: 'client-deliverable-card-finance',
-              stageId: 'technology',
-              number: '03',
-              title: 'Finance',
-              accentColor: 'bg-[#f59e0b]',
-              accentTextColor: 'text-[#f59e0b]',
-              borderColor: 'border-[#f59e0b]/30 hover:border-[#f59e0b]/70',
-              glowColor: 'hover:shadow-[0_12px_36px_rgba(245,158,11,0.12)]',
-              clientProblem: 'Capital constraints, perceived project risks, and unbankable structures preventing private and multilateral investment.',
-              deliverables: [
-                'Bankability & project financial models',
-                'Blended finance & risk-mitigation structures',
-                'Syndicated investment pipelines'
-              ]
-            },
-            {
-              id: 'client-deliverable-card-deliver',
-              stageId: 'evidence',
-              number: '04',
-              title: 'Deliver',
-              accentColor: 'bg-[#a855f7]',
-              accentTextColor: 'text-[#a855f7]',
-              borderColor: 'border-[#a855f7]/30 hover:border-[#a855f7]/70',
-              glowColor: 'hover:shadow-[0_12px_36px_rgba(168,85,247,0.12)]',
-              clientProblem: 'Execution bottlenecks, inter-agency silos, delivery unit absence, and lack of specialized implementation capacity.',
-              deliverables: [
-                'Cabinet delivery unit (PMO) setup',
-                'Cross-ministerial execution sprints',
-                'Civil service capability transfer'
-              ]
-            },
-            {
-              id: 'client-deliverable-card-measure',
-              stageId: 'finance',
-              number: '05',
-              title: 'Measure',
-              accentColor: 'bg-[#38bdf8]',
-              accentTextColor: 'text-[#38bdf8]',
-              borderColor: 'border-[#38bdf8]/30 hover:border-[#38bdf8]/70',
-              glowColor: 'hover:shadow-[0_12px_36px_rgba(56,189,248,0.12)]',
-              clientProblem: 'Lack of verified impact data, delayed reporting cycles, and missing telemetry needed for adaptive decision-making.',
-              deliverables: [
-                'Rigorous MEL frameworks & indicators',
-                'Live execution telemetry & dashboards',
-                'Causal impact evaluations & course corrections'
-              ]
-            },
-            {
-              id: 'client-deliverable-card-scale',
-              stageId: 'delivery',
-              number: '06',
-              title: 'Scale',
-              accentColor: 'bg-[#10b981]',
-              accentTextColor: 'text-[#10b981]',
-              borderColor: 'border-[#10b981]/30 hover:border-[#10b981]/70',
-              glowColor: 'hover:shadow-[0_12px_36px_rgba(16,185,129,0.12)]',
-              clientProblem: 'Promising pilots remain localized experiments rather than achieving nationwide institutionalization and sovereign permanence.',
-              deliverables: [
-                'National replication & expansion strategies',
-                'Institutionalization & handover playbooks',
-                'Long-term policy uptake frameworks'
-              ]
-            }
-          ].map((card, idx) => (
-            <motion.div
-              key={card.id}
-              id={card.id}
-              initial={{ opacity: 0, y: 20 }}
+          <div className="w-full max-w-5xl space-y-6 pt-6 text-left">
+            <motion.p
+              id="policy-strategy-advisory-paragraph"
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.08 }}
-              onClick={() => onSelectNode(card.stageId as SystemNodeId)}
-              className={`relative flex flex-col justify-between p-5 rounded-2xl bg-[#0b1524]/95 border transition-all duration-300 cursor-pointer overflow-hidden min-h-[300px] group ${card.borderColor} ${card.glowColor} hover:bg-[#0e1a2b]`}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-left w-full text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-200"
             >
-              <div>
-                {/* Top Accent Pill Bar */}
-                <div className="flex items-center justify-start mb-3.5">
-                  <div className={`w-10 h-1 rounded-full ${card.accentColor}`} />
-                </div>
+              <strong className="font-bold text-white tracking-tight">
+                Policy, Economics & Strategy Advisory
+              </strong>{' '}
+              <span className="text-slate-400 font-light">—</span>{' '}
+              <span className="italic text-[#38d9c0] font-medium">
+                "We need to understand the problem and choose a defensible course of action."
+              </span>{' '}
+              <span className="text-[#38d9c0] font-bold mx-1">→</span>{' '}
+              <span className="text-slate-300 font-normal">
+                diagnostics, modeling, political-economy analysis, regulatory reviews, sector strategies, fiscal and cost-benefit analysis, reform road maps.
+              </span>
+            </motion.p>
 
-                {/* Header: Stage Number & Title */}
-                <div className="flex items-center justify-between w-full mb-3">
-                  <span className="font-mono text-xs font-semibold text-slate-400 tracking-wider">
-                    {card.number}
-                  </span>
-                </div>
-                <h3 className="text-lg sm:text-[19px] font-bold text-white tracking-tight leading-snug mb-3.5 group-hover:text-slate-100 transition-colors">
-                  {card.title}
-                </h3>
+            <motion.p
+              id="program-project-design-paragraph"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-left w-full text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-200"
+            >
+              <strong className="font-bold text-white tracking-tight">
+                Program & Project Design
+              </strong>{' '}
+              <span className="text-slate-400 font-light">—</span>{' '}
+              <span className="italic text-[#38d9c0] font-medium">
+                "We have a mandate or funding window but need an implementable program."
+              </span>{' '}
+              <span className="text-[#38d9c0] font-bold mx-1">→</span>{' '}
+              <span className="text-slate-300 font-normal">
+                feasibility studies, theories of change, concepts, results frameworks, implementation and financing plans, risk registers, project-preparation support.
+              </span>
+            </motion.p>
 
-                {/* Client Problem Sub-heading */}
-                <div className="mb-4">
-                  <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1.5">
-                    <AlertCircle className="w-3.5 h-3.5 text-amber-400/90 shrink-0" />
-                    <span>Client Problem</span>
-                  </h4>
-                  <p className="text-slate-300 text-xs sm:text-[13px] leading-relaxed font-normal">
-                    {card.clientProblem}
-                  </p>
-                </div>
-              </div>
+            <motion.p
+              id="finance-capital-mobilization-paragraph"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-left w-full text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-200"
+            >
+              <strong className="font-bold text-white tracking-tight">
+                Development Finance & Private Capital Mobilization
+              </strong>{' '}
+              <span className="text-slate-400 font-light">—</span>{' '}
+              <span className="italic text-[#38d9c0] font-medium">
+                "Public funding is insufficient; how do we make this investable?"
+              </span>{' '}
+              <span className="text-[#38d9c0] font-bold mx-1">→</span>{' '}
+              <span className="text-slate-300 font-normal">
+                investment cases, blended-finance strategy, PPP advisory, financial models, bankability assessments, climate-finance strategy, pipelines, market sounding, de-risking.
+              </span>
+            </motion.p>
 
-              {/* Deliverables Sub-heading & List */}
-              <div className="pt-3 border-t border-slate-800/90 mt-2">
-                <h4 className={`text-xs font-mono font-semibold uppercase tracking-wider ${card.accentTextColor} mb-2 flex items-center gap-1.5`}>
-                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                  <span>Deliverables</span>
-                </h4>
-                <ul className="space-y-1.5 text-xs text-slate-300/95 font-normal">
-                  {card.deliverables.map((item, i) => (
-                    <li key={i} className="flex items-start gap-1.5 leading-snug">
-                      <span className={`${card.accentTextColor} mt-0.5`}>•</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          ))}
+            <motion.p
+              id="institutions-governance-delivery-paragraph"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-left w-full text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-200"
+            >
+              <strong className="font-bold text-white tracking-tight">
+                Institutions, Governance & Delivery
+              </strong>{' '}
+              <span className="text-slate-400 font-light">—</span>{' '}
+              <span className="italic text-[#38d9c0] font-medium">
+                "A policy exists, but institutions cannot implement it consistently."
+              </span>{' '}
+              <span className="text-[#38d9c0] font-bold mx-1">→</span>{' '}
+              <span className="text-slate-300 font-normal">
+                institutional diagnostics, governance frameworks, PFM reform, delivery models, process redesign, capacity development, change management.
+              </span>
+            </motion.p>
+
+            <motion.p
+              id="mel-impact-paragraph"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-left w-full text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-200"
+            >
+              <strong className="font-bold text-white tracking-tight">
+                Monitoring, Evaluation, Learning & Impact
+              </strong>{' '}
+              <span className="text-slate-400 font-light">—</span>{' '}
+              <span className="italic text-[#38d9c0] font-medium">
+                "We need to know what is working, why, for whom, and whether it can scale."
+              </span>{' '}
+              <span className="text-[#38d9c0] font-bold mx-1">→</span>{' '}
+              <span className="text-slate-300 font-normal">
+                MEL frameworks, baselines, process/impact evaluations, learning agendas, outcome harvesting, dashboards, adaptive management.
+              </span>
+            </motion.p>
+
+            <motion.p
+              id="data-digital-ai-paragraph"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="text-left w-full text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-200"
+            >
+              <strong className="font-bold text-white tracking-tight">
+                Data, Digital & Responsible AI
+              </strong>{' '}
+              <span className="text-slate-400 font-light">—</span>{' '}
+              <span className="italic text-[#38d9c0] font-medium">
+                "We need to modernize systems without creating new governance, exclusion or accountability risks."
+              </span>{' '}
+              <span className="text-[#38d9c0] font-bold mx-1">→</span>{' '}
+              <span className="text-slate-300 font-normal">
+                DPI diagnostics, digital-government strategy, data governance, interoperability, AI readiness and governance, service design, digital inclusion.
+              </span>
+            </motion.p>
+          </div>
         </div>
       </motion.div>
     </div>
