@@ -895,8 +895,8 @@ export const defaultEightSystemsConfig: EightSystemsConfig = {
 
 export const defaultSystemsHero: SystemsHeroSectionData = {
   badge: 'POLICY • ECONOMICS • DEVELOPMENT FINANCE • IMPLEMENTATION',
-  titlePrefix: 'Turning complex policy challenges',
-  titleHighlight: 'into implementable, investable solutions.',
+  titlePrefix: 'Turning complex policy challenges into',
+  titleHighlight: 'implementable, investable solutions.',
   description:
     'IP3 Consulting Limited is a policy and development advisory firm helping multilateral institutions, development partners, governments, businesses and research organizations design better policies, mobilize investment, strengthen institutions and deliver measurable results.',
   exploreBtnText: 'Explore Whole Systems Architecture',

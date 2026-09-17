@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
+import { Layers, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { SystemNodeId } from '../data/systemsData';
 
 interface OrbitalSystemProps {
   onSelectNode: (nodeId: SystemNodeId) => void;
   selectedNodeId?: SystemNodeId | null;
+  onExploreCapabilities?: () => void;
   className?: string;
 }
 
@@ -24,6 +26,7 @@ interface SpectrumCardData {
 export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
   onSelectNode,
   selectedNodeId,
+  onExploreCapabilities,
   className = '',
 }) => {
   const [hoveredNode, setHoveredNode] = useState<SystemNodeId | null>(null);
@@ -54,9 +57,8 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
       themeIndex: 0,
       number: '01',
       topAccentColor: 'bg-[#ff7e67]',
-      title: 'Poly–crises to',
-      titleBreak: 'poly–solutions',
-      description: 'Eight connected systems become one legible field for action.',
+      title: 'Diagnose',
+      description: 'Economic, institutional, market and political-economy analysis that clarifies the problem and identifies realistic options.',
       hoverBorder: 'hover:border-[#ff7e67]/60',
       hoverGlow: 'hover:shadow-[0_12px_36px_rgba(255,126,103,0.14)]',
       lineColor: '#ff7e67',
@@ -66,9 +68,8 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
       themeIndex: 1,
       number: '02',
       topAccentColor: 'bg-[#2dd4bf]',
-      title: 'Translation, not',
-      titleBreak: 'theory',
-      description: 'Evidence moves through architecture, delivery and learning.',
+      title: 'Design',
+      description: 'Policies, programs, investment concepts, theories of change, financing strategies, implementation arrangements.',
       hoverBorder: 'hover:border-[#2dd4bf]/60',
       hoverGlow: 'hover:shadow-[0_12px_36px_rgba(45,212,191,0.14)]',
       lineColor: '#2dd4bf',
@@ -78,9 +79,8 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
       themeIndex: 2,
       number: '03',
       topAccentColor: 'bg-[#f59e0b]',
-      title: 'Thinking that',
-      titleBreak: 'ships',
-      description: 'Research and practical intelligence designed to move decisions.',
+      title: 'Finance',
+      description: 'Bankability analysis, blended finance, climate finance, private-capital mobilization, investment pipelines.',
       hoverBorder: 'hover:border-[#f59e0b]/60',
       hoverGlow: 'hover:shadow-[0_12px_36px_rgba(245,158,11,0.14)]',
       lineColor: '#f59e0b',
@@ -90,9 +90,8 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
       themeIndex: 3,
       number: '04',
       topAccentColor: 'bg-[#a855f7]',
-      title: 'A convenor',
-      titleBreak: 'between worlds',
-      description: 'Authority, evidence, capital and lived experience meet around outcomes.',
+      title: 'Deliver',
+      description: 'Institutional strengthening, implementation support, capacity development, adaptive problem-solving.',
       hoverBorder: 'hover:border-[#a855f7]/60',
       hoverGlow: 'hover:shadow-[0_12px_36px_rgba(168,85,247,0.14)]',
       lineColor: '#a855f7',
@@ -102,9 +101,8 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
       themeIndex: 4,
       number: '05',
       topAccentColor: 'bg-[#38bdf8]',
-      title: 'Capital that',
-      titleBreak: 'unlocks',
-      description: 'Blended facilities and green investment pathways derisking private capital.',
+      title: 'Measure',
+      description: 'MEL frameworks, evaluations, results systems, dashboards, learning processes.',
       hoverBorder: 'hover:border-[#38bdf8]/60',
       hoverGlow: 'hover:shadow-[0_12px_36px_rgba(56,189,248,0.14)]',
       lineColor: '#38bdf8',
@@ -114,9 +112,8 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
       themeIndex: 5,
       number: '06',
       topAccentColor: 'bg-[#10b981]',
-      title: 'Delivery & learning',
-      titleBreak: 'at scale',
-      description: 'Autonomous delivery units and feedback loops that codify lasting reform.',
+      title: 'Scale',
+      description: 'Evidence translation, replication strategies, policy uptake, institutionalization.',
       hoverBorder: 'hover:border-[#10b981]/60',
       hoverGlow: 'hover:shadow-[0_12px_36px_rgba(16,185,129,0.14)]',
       lineColor: '#10b981',
@@ -392,6 +389,218 @@ export const OrbitalSystem: React.FC<OrbitalSystemProps> = ({
           );
         })}
       </div>
+
+      {/* Explore Our Capabilities Button */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="mt-8 sm:mt-10 flex flex-col items-center justify-center w-full relative z-20"
+      >
+        <button
+          id="btn-explore-our-capabilities"
+          onClick={() => {
+            if (onExploreCapabilities) {
+              onExploreCapabilities();
+            } else {
+              const poly = document.querySelector('#poly-solutions-master-section') || document.querySelector('#systems-hero');
+              if (poly) {
+                poly.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          }}
+          className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-[#081220] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700/80 hover:border-[#38d9c0]/60 font-semibold text-sm sm:text-base tracking-wide transition-all shadow-lg hover:shadow-xl hover:shadow-[#38d9c0]/15 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer group"
+        >
+          <span>Explore Our Capabilities.</span>
+          <Layers className="w-4 h-4 text-[#38d9c0] group-hover:scale-110 transition-transform duration-200" />
+        </button>
+
+        {/* Duplicate of Header Block */}
+        <div className="flex flex-col items-center text-center max-w-[1500px] w-full mx-auto space-y-4 mt-12 sm:mt-16 mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-2"
+          >
+            <span className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] text-[#38d9c0] uppercase">
+              WHAT WE DO
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-serif text-[49px] font-bold text-white tracking-normal sm:tracking-tight leading-snug sm:leading-[1.2] md:leading-[1.25] py-1.5 overflow-visible w-[1500px] max-w-full"
+          >
+            <span className="block w-auto text-[54px]">What clients hire IP3 to deliver.</span>
+          </motion.h2>
+        </div>
+
+        {/* Six Cards: Client Problem + Deliverables */}
+        <div
+          id="client-deliverables-grid"
+          className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3.5 sm:gap-4 relative z-20 mt-4"
+        >
+          {[
+            {
+              id: 'client-deliverable-card-diagnose',
+              stageId: 'institutions',
+              number: '01',
+              title: 'Diagnose',
+              accentColor: 'bg-[#ff7e67]',
+              accentTextColor: 'text-[#ff7e67]',
+              borderColor: 'border-[#ff7e67]/30 hover:border-[#ff7e67]/70',
+              glowColor: 'hover:shadow-[0_12px_36px_rgba(255,126,103,0.12)]',
+              clientProblem: 'Unclear root causes, institutional gridlock, distorted market signals, or diagnostic blind spots stalling critical reforms.',
+              deliverables: [
+                'Diagnostic dossiers & root-cause mapping',
+                'Institutional political-economy audits',
+                'Market structure & baseline assessments'
+              ]
+            },
+            {
+              id: 'client-deliverable-card-design',
+              stageId: 'policy',
+              number: '02',
+              title: 'Design',
+              accentColor: 'bg-[#2dd4bf]',
+              accentTextColor: 'text-[#2dd4bf]',
+              borderColor: 'border-[#2dd4bf]/30 hover:border-[#2dd4bf]/70',
+              glowColor: 'hover:shadow-[0_12px_36px_rgba(45,212,191,0.12)]',
+              clientProblem: 'High-level policy mandates lack actionable program blueprints, governance rules, and robust theories of change.',
+              deliverables: [
+                'Multi-year program & policy blueprints',
+                'Theory of Change & operational roadmaps',
+                'Regulatory sandboxes & statutory frameworks'
+              ]
+            },
+            {
+              id: 'client-deliverable-card-finance',
+              stageId: 'technology',
+              number: '03',
+              title: 'Finance',
+              accentColor: 'bg-[#f59e0b]',
+              accentTextColor: 'text-[#f59e0b]',
+              borderColor: 'border-[#f59e0b]/30 hover:border-[#f59e0b]/70',
+              glowColor: 'hover:shadow-[0_12px_36px_rgba(245,158,11,0.12)]',
+              clientProblem: 'Capital constraints, perceived project risks, and unbankable structures preventing private and multilateral investment.',
+              deliverables: [
+                'Bankability & project financial models',
+                'Blended finance & risk-mitigation structures',
+                'Syndicated investment pipelines'
+              ]
+            },
+            {
+              id: 'client-deliverable-card-deliver',
+              stageId: 'evidence',
+              number: '04',
+              title: 'Deliver',
+              accentColor: 'bg-[#a855f7]',
+              accentTextColor: 'text-[#a855f7]',
+              borderColor: 'border-[#a855f7]/30 hover:border-[#a855f7]/70',
+              glowColor: 'hover:shadow-[0_12px_36px_rgba(168,85,247,0.12)]',
+              clientProblem: 'Execution bottlenecks, inter-agency silos, delivery unit absence, and lack of specialized implementation capacity.',
+              deliverables: [
+                'Cabinet delivery unit (PMO) setup',
+                'Cross-ministerial execution sprints',
+                'Civil service capability transfer'
+              ]
+            },
+            {
+              id: 'client-deliverable-card-measure',
+              stageId: 'finance',
+              number: '05',
+              title: 'Measure',
+              accentColor: 'bg-[#38bdf8]',
+              accentTextColor: 'text-[#38bdf8]',
+              borderColor: 'border-[#38bdf8]/30 hover:border-[#38bdf8]/70',
+              glowColor: 'hover:shadow-[0_12px_36px_rgba(56,189,248,0.12)]',
+              clientProblem: 'Lack of verified impact data, delayed reporting cycles, and missing telemetry needed for adaptive decision-making.',
+              deliverables: [
+                'Rigorous MEL frameworks & indicators',
+                'Live execution telemetry & dashboards',
+                'Causal impact evaluations & course corrections'
+              ]
+            },
+            {
+              id: 'client-deliverable-card-scale',
+              stageId: 'delivery',
+              number: '06',
+              title: 'Scale',
+              accentColor: 'bg-[#10b981]',
+              accentTextColor: 'text-[#10b981]',
+              borderColor: 'border-[#10b981]/30 hover:border-[#10b981]/70',
+              glowColor: 'hover:shadow-[0_12px_36px_rgba(16,185,129,0.12)]',
+              clientProblem: 'Promising pilots remain localized experiments rather than achieving nationwide institutionalization and sovereign permanence.',
+              deliverables: [
+                'National replication & expansion strategies',
+                'Institutionalization & handover playbooks',
+                'Long-term policy uptake frameworks'
+              ]
+            }
+          ].map((card, idx) => (
+            <motion.div
+              key={card.id}
+              id={card.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: idx * 0.08 }}
+              onClick={() => onSelectNode(card.stageId as SystemNodeId)}
+              className={`relative flex flex-col justify-between p-5 rounded-2xl bg-[#0b1524]/95 border transition-all duration-300 cursor-pointer overflow-hidden min-h-[300px] group ${card.borderColor} ${card.glowColor} hover:bg-[#0e1a2b]`}
+            >
+              <div>
+                {/* Top Accent Pill Bar */}
+                <div className="flex items-center justify-start mb-3.5">
+                  <div className={`w-10 h-1 rounded-full ${card.accentColor}`} />
+                </div>
+
+                {/* Header: Stage Number & Title */}
+                <div className="flex items-center justify-between w-full mb-3">
+                  <span className="font-mono text-xs font-semibold text-slate-400 tracking-wider">
+                    {card.number}
+                  </span>
+                </div>
+                <h3 className="text-lg sm:text-[19px] font-bold text-white tracking-tight leading-snug mb-3.5 group-hover:text-slate-100 transition-colors">
+                  {card.title}
+                </h3>
+
+                {/* Client Problem Sub-heading */}
+                <div className="mb-4">
+                  <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-400 mb-1.5 flex items-center gap-1.5">
+                    <AlertCircle className="w-3.5 h-3.5 text-amber-400/90 shrink-0" />
+                    <span>Client Problem</span>
+                  </h4>
+                  <p className="text-slate-300 text-xs sm:text-[13px] leading-relaxed font-normal">
+                    {card.clientProblem}
+                  </p>
+                </div>
+              </div>
+
+              {/* Deliverables Sub-heading & List */}
+              <div className="pt-3 border-t border-slate-800/90 mt-2">
+                <h4 className={`text-xs font-mono font-semibold uppercase tracking-wider ${card.accentTextColor} mb-2 flex items-center gap-1.5`}>
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                  <span>Deliverables</span>
+                </h4>
+                <ul className="space-y-1.5 text-xs text-slate-300/95 font-normal">
+                  {card.deliverables.map((item, i) => (
+                    <li key={i} className="flex items-start gap-1.5 leading-snug">
+                      <span className={`${card.accentTextColor} mt-0.5`}>•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };
