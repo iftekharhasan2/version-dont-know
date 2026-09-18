@@ -25,8 +25,8 @@ router.post(
     }
 
     const user = { email: process.env.ADMIN_EMAIL || 'admin@ip3.org', role: 'admin' };
-    const expiresAt = issueSession(res, user);
-    res.json({ ok: true, user, expiresAt });
+    const { expiresAt, token } = issueSession(res, user);
+    res.json({ ok: true, user, expiresAt, token });
   })
 );
 

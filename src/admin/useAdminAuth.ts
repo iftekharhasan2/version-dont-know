@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { api, ApiError } from '../lib/apiClient';
+import { api, ApiError, setAuthToken } from '../lib/apiClient';
 
 export type AuthState = 'checking' | 'authenticated' | 'unauthenticated';
 
@@ -39,6 +39,9 @@ export function useAdminAuth() {
 
     try {
       const res = await api.post('/auth/login', { password });
+      if (res.token) {
+        setAuthToken(res.token);
+      }
       setUser(res.user || null);
       setExpiresAt(res.expiresAt || null);
       setState('authenticated');
@@ -46,6 +49,7 @@ export function useAdminAuth() {
     } catch (err) {
       // No client-side fallback: the passphrase is only ever verified by the
       // API, so a failed or unreachable server means no session.
+      setAuthToken(null);
       setError(
         err instanceof ApiError && err.status === 401
           ? err.message
@@ -66,6 +70,7 @@ export function useAdminAuth() {
     } catch {
       /* the cookie may already have expired */
     }
+    setAuthToken(null);
     setUser(null);
     setExpiresAt(null);
     setState('unauthenticated');

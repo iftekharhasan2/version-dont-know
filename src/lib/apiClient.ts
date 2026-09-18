@@ -11,6 +11,30 @@ const RAW_BASE = (import.meta.env.VITE_API_BASE_URL || '').trim();
 /** In dev this stays empty and Vite proxies /api to the local server. */
 export const API_BASE = RAW_BASE.replace(/\/+$/, '');
 
+let inMemoryToken: string | null = null;
+try {
+  inMemoryToken = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('ip3_auth_token') : null;
+} catch {
+  // SessionStorage may be unavailable in restricted sandbox
+}
+
+export function setAuthToken(token: string | null) {
+  inMemoryToken = token;
+  try {
+    if (token) {
+      sessionStorage.setItem('ip3_auth_token', token);
+    } else {
+      sessionStorage.removeItem('ip3_auth_token');
+    }
+  } catch {
+    // Ignore storage errors in restricted contexts
+  }
+}
+
+export function getAuthToken(): string | null {
+  return inMemoryToken;
+}
+
 export class ApiError extends Error {
   status: number;
   code: string;
@@ -45,11 +69,13 @@ export async function request<T = any>(path: string, options: RequestOptions = {
 
   let res: Response;
   try {
+    const token = inMemoryToken;
     res = await fetch(url, {
       credentials: 'include',
       headers: {
         Accept: 'application/json',
         ...(body !== undefined ? { 'Content-Type': 'application/json' } : {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...headers,
       },
       ...(body !== undefined ? { body: JSON.stringify(body) } : {}),

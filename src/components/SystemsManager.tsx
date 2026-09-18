@@ -193,7 +193,7 @@ export const SystemsManager: React.FC = () => {
               value={config.titleMain}
               onChange={(e) => handleUpdateHeader('titleMain', e.target.value)}
               className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:border-amber-400 outline-none"
-              placeholder="Eight systems. One "
+              placeholder="Eight sectors. One "
             />
           </div>
 
@@ -204,7 +204,7 @@ export const SystemsManager: React.FC = () => {
               value={config.titleHighlight}
               onChange={(e) => handleUpdateHeader('titleHighlight', e.target.value)}
               className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white focus:border-amber-400 outline-none"
-              placeholder="overlapping reality."
+              placeholder="integrated delivery model."
             />
           </div>
         </div>

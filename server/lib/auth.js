@@ -35,11 +35,10 @@ export async function verifyPassword(password) {
 }
 
 export function cookieOptions() {
-  const isProd = process.env.NODE_ENV === 'production';
-  const sameSite = process.env.COOKIE_SAMESITE || (isProd ? 'none' : 'lax');
+  const sameSite = process.env.COOKIE_SAMESITE || 'none';
   return {
     httpOnly: true,
-    secure: isProd || sameSite === 'none',
+    secure: true,
     sameSite,
     maxAge: MAX_AGE_MS,
     path: '/',
@@ -52,7 +51,7 @@ export function issueSession(res, user) {
     expiresIn: `${SESSION_DAYS}d`,
   });
   res.cookie(COOKIE_NAME, token, cookieOptions());
-  return expiresAt.toISOString();
+  return { expiresAt: expiresAt.toISOString(), token };
 }
 
 export function clearSession(res) {
@@ -60,7 +59,10 @@ export function clearSession(res) {
 }
 
 export function readSession(req) {
-  const token = req.cookies?.[COOKIE_NAME];
+  let token = req.cookies?.[COOKIE_NAME];
+  if (!token && req.headers?.authorization?.startsWith('Bearer ')) {
+    token = req.headers.authorization.slice(7).trim();
+  }
   if (!token) return null;
   try {
     const payload = jwt.verify(token, jwtSecret());

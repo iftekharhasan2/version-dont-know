@@ -171,46 +171,7 @@ export const SystemsArchitectureSection: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Duplicate of Header Block */}
-          <div className="flex flex-col items-center text-center max-w-[1500px] w-full mx-auto space-y-4 mb-8 sm:mb-12">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex items-center gap-2"
-            >
-              <span className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] text-[#38d9c0] uppercase">
-                BUILT FOR COMPLEX MANDATES
-              </span>
-            </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-serif text-[49px] font-bold text-white tracking-normal sm:tracking-tight leading-snug sm:leading-[1.2] md:leading-[1.25] py-1.5 overflow-visible w-[1500px] max-w-full"
-            >
-              <span className="block w-auto text-[54px]">From evidence to decisions.</span>
-              <span className="block italic font-normal text-[#00ff00] tracking-normal mt-1">
-                From decisions to delivery.
-              </span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl pt-1 font-normal"
-            >
-              Development challenges rarely fit within one ministry, one sector or one financing instrument. IP3 brings together economics, public policy, finance, institutional analysis, technology and implementation expertise to help clients move through the full decision cycle.
-            </motion.p>
-          </div>
-          
-
-          {/* Full-width Diagram: IP3 Center Hub + 4 Connected Cards (image.png layout) */}
+          {/* Full-width Diagram: IP3 Center Hub + 6 Connected Cards */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -391,6 +352,100 @@ export const SystemsArchitectureSection: React.FC = () => {
               </span>
             </motion.p>
           </div>
+        </div>
+      </section>
+
+      {/* Cloned Section: Built For Complexity · From Evidence to Decisions */}
+      <section
+        id="systems-architecture-clone"
+        className="relative w-full min-h-screen flex flex-col justify-center py-12 sm:py-16 px-4 sm:px-8 lg:px-12 max-w-[1500px] mx-auto z-10 bg-[#050a12] border-t border-slate-800/80"
+      >
+        <div className="flex flex-col items-center w-full my-auto py-4">
+          <div
+            id="ip3-built-for-complexity-block"
+            className="flex flex-col items-center text-center max-w-[1500px] w-full mx-auto space-y-4 mb-8 sm:mb-12"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex items-center gap-2"
+            >
+              <span className="font-mono text-[11px] sm:text-xs font-semibold tracking-[0.22em] text-[#38d9c0] uppercase">
+                IP3 · BUILT FOR COMPLEXITY
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-serif text-3xl sm:text-4xl md:text-[49px] font-bold text-white tracking-normal sm:tracking-tight leading-snug sm:leading-[1.2] md:leading-[1.25] py-1.5 overflow-visible w-[1500px] max-w-full"
+            >
+              <span className="w-auto text-3xl sm:text-4xl md:text-[54px] inline-block">
+                From evidence to decisions.
+              </span>{' '}
+              <span className="italic font-normal text-[#ff7e67] tracking-normal inline-block text-3xl sm:text-4xl md:text-[54px]">
+                From decisions to delivery.
+              </span>
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl pt-1 font-normal"
+            >
+              {hero.description}
+            </motion.p>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="flex flex-wrap items-center justify-center gap-4 pt-4"
+            >
+              <button
+                id="btn-discuss-assignment-clone"
+                onClick={() => handleOpenConsultation('core')}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#ff7e67] hover:bg-[#ff694f] text-[#050a12] font-bold text-sm sm:text-base tracking-wide transition-all shadow-lg shadow-[#ff7e67]/20 hover:shadow-xl hover:shadow-[#ff7e67]/30 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              >
+                <span>Discuss an Assignment</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                id="btn-explore-capabilities-clone"
+                onClick={() => handleSelectNode('institutions')}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#081220] hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700/80 hover:border-slate-500 font-semibold text-sm sm:text-base tracking-wide transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              >
+                <span>Explore Our Capabilities</span>
+                <Layers className="w-4 h-4 text-[#38d9c0]" />
+              </button>
+            </motion.div>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="w-full flex items-center justify-center relative"
+          >
+            <OrbitalSystem
+              id="orbital-system-container-clone"
+              cardCount={4}
+              orientation="vertical"
+              badgeLabel="BUILT FOR COMPLEXITY"
+              onSelectNode={handleSelectNode}
+              selectedNodeId={selectedStoryNodeId}
+            />
+          </motion.div>
         </div>
       </section>
 

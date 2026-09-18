@@ -27,6 +27,13 @@ export const EightSystemsHero: React.FC<EightSystemsHeroProps> = ({
 }) => {
   const hasActive = selectedSystemId !== null;
 
+  const displayMain =
+    !titleMain || titleMain === 'Eight systems. One ' ? 'Eight sectors. One ' : titleMain;
+  const displayHighlight =
+    !titleHighlight || titleHighlight === 'overlapping reality.'
+      ? 'integrated delivery model.'
+      : titleHighlight;
+
   const getFontClass = () => {
     switch (fontFamily) {
       case 'playfair':
@@ -149,8 +156,8 @@ export const EightSystemsHero: React.FC<EightSystemsHeroProps> = ({
             className={`${getFontClass()} leading-[1.08] sm:leading-[1.06] tracking-[-0.025em] text-slate-100 font-normal whitespace-nowrap overflow-visible`}
             style={{ fontSize: 'clamp(22px, 3.8vw, 64px)' }}
           >
-            <span className="inline">{titleMain || 'Eight systems. One '}</span>
-            <span className="inline text-slate-300">{titleHighlight || 'overlapping reality.'}</span>
+            <span className="inline">{displayMain}</span>
+            <span className="inline text-slate-300">{displayHighlight}</span>
           </h1>
         </motion.div>
 
