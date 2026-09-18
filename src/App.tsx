@@ -54,16 +54,49 @@ function AppContent() {
   const [targetSection, setTargetSection] = useState<string | undefined>(undefined);
 
   /**
-   * Every visit — including a reload or a back-navigation — opens on the header
-   * slider. Browsers restore the previous scroll offset by default, which would
-   * drop a returning visitor midway down the page.
+   * Support direct linking and browser history for indexable pages (e.g. #/services/economic)
    */
   React.useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#/services/') || hash.startsWith('#services/')) {
+        const sub = hash.replace(/^#\/?services\//, '');
+        setCurrentPage('services');
+        setTargetSection(sub);
+        window.scrollTo(0, 0);
+      } else if (hash === '#/services' || hash === '#services') {
+        setCurrentPage('services');
+        setTargetSection(undefined);
+        window.scrollTo(0, 0);
+      } else if (hash === '#/about' || hash === '#about') {
+        setCurrentPage('about');
+        window.scrollTo(0, 0);
+      } else if (hash === '#/approach' || hash === '#approach') {
+        setCurrentPage('approach');
+        window.scrollTo(0, 0);
+      } else if (hash === '#/focus' || hash === '#focus') {
+        setCurrentPage('focus');
+        window.scrollTo(0, 0);
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  /**
+   * Every visit — including a reload or a back-navigation — opens on the header
+   * slider if no specific subpage hash was requested.
+   */
+  React.useEffect(() => {
+    if (!window.location.hash.startsWith('#/')) {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+      setCurrentSlideId(data.slides?.[0]?.id ?? 1);
     }
-    window.scrollTo(0, 0);
-    setCurrentSlideId(data.slides?.[0]?.id ?? 1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -74,6 +107,19 @@ function AppContent() {
   const handleNavigate = (page: 'home' | 'about' | 'approach' | 'focus' | 'services', sectionId?: string) => {
     setCurrentPage(page);
     setTargetSection(sectionId);
+
+    // Sync browser URL hash for indexability and bookmarking
+    if (page === 'services') {
+      window.location.hash = sectionId ? `#/services/${sectionId}` : '#/services';
+    } else if (page === 'home') {
+      if (sectionId && sectionId !== '#hero') {
+        window.location.hash = sectionId;
+      } else if (window.location.hash.startsWith('#/')) {
+        history.replaceState(null, '', window.location.pathname);
+      }
+    } else {
+      window.location.hash = `#/${page}`;
+    }
 
     // Landing on home with no section requested means the header slider.
     if (page === 'home' && (!sectionId || sectionId === '#hero')) {
@@ -178,7 +224,7 @@ function AppContent() {
           <Ip3TrailerSection />
 
           {/* Complexity & Systems Architecture Section (Built for the complexity of now) */}
-          <SystemsArchitectureSection />
+          <SystemsArchitectureSection onNavigate={handleNavigate} />
 
           {/* Executive Briefing / Strategic Leadership Section */}
           <ExecutiveCard
